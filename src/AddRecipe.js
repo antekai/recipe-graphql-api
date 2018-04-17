@@ -2,10 +2,11 @@ import React from "react";
 import { css } from "glamor";
 import { graphql } from "react-apollo";
 import uuidV4 from "uuid/v4";
-import CreateRecipe from "./mutations/CreateRecipe/CreateRecipe.js";
-import ListRecipes from "./queries/ListRecipes/ListRecipes.js";
 
-class AddRecipe extends Component {
+import CreateRecipe from "./mutations/CreateRecipe";
+import ListRecipes from "./queries/ListRecipes";
+
+class AddRecipe extends React.Component {
   state = {
     name: "",
     ingredient: "",
@@ -13,21 +14,18 @@ class AddRecipe extends Component {
     instruction: "",
     instructions: []
   };
-
-  onChange = (ket, value) => {
-    this.setSate({ [key]: value });
+  onChange = (key, value) => {
+    this.setState({ [key]: value });
   };
-
   addInstruction = () => {
     if (this.state.instruction === "") return;
     const instructions = this.state.instructions;
     instructions.push(this.state.instruction);
-    this.setSate({
+    this.setState({
       instructions,
       instruction: ""
     });
   };
-
   addIngredient = () => {
     if (this.state.ingredient === "") return;
     const ingredients = this.state.ingredients;
